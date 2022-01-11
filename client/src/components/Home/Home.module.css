@@ -1,0 +1,7 @@
+.containerCountry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  color: rgba(236, 227, 235, 0.562);
+}
