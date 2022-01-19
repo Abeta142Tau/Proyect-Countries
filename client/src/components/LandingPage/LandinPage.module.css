@@ -1,0 +1,40 @@
+.container {
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+  gap: 0.05rem;
+  color: #290825;
+  text-decoration: none;
+  margin: 100px 300px 100px 300px;
+  padding: 0.5%;
+  background-color: rgba(216, 214, 214, 0.699);
+  box-shadow: 0px 5px 20px 3px rgb(189, 184, 178);
+  width: 750px;
+  height: 500px;
+  border-radius: 1.5rem;
+}
+
+.button {
+  display: flexbox;
+  align-content: center;
+  border-radius: 20px;
+  background: transparent;
+  border: solid 1px rgb(120, 94, 145);
+  font-size: 18px;
+  text-align: center;
+  margin: 30px;
+}
+
+.button:hover {
+  background-color: rgb(120, 94, 145);
+  color: white;
+}
+
+.textos {
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+  margin: 150px;
+}

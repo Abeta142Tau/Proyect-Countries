@@ -6,11 +6,14 @@ import {
   getAllCountries,
   filterByContinents,
   filterBySort,
+  filterByPopulation,
+  filterByActivity,
 } from "../../actions/action_index";
 import CountryCard from "../ContryCard/CountryCard";
-import styles from "./Home.module.css";
+import style from "./Home.module.css";
 import Paged from "../Paged/Paged";
 import SearchBar from "../SearchBar/SearchBar";
+import NavBar from "../NavBar/NavBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -42,6 +45,8 @@ export default function Home() {
   function handleFilterByContinent(e) {
     e.preventDefault();
     dispatch(filterByContinents(e.target.value));
+    setCurrentPage(1);
+    setSortOrden(`Ordenado ${e.target.value}`);
   }
 
   function handleFilterBySort(e) {
@@ -51,33 +56,40 @@ export default function Home() {
     setSortOrden(`Ordenado ${e.target.value}`);
   }
 
+  function handleFilterByPopulation(e) {
+    e.preventDefault();
+    dispatch(filterByPopulation(e.target.value));
+    setCurrentPage(1);
+    setSortOrden(`Oredenado ${e.target.value}`);
+  }
+
+  function handleFilterByActivity(e) {
+    e.preventDefault();
+    console.log(e.target.value);
+    dispatch(filterByActivity(e.target.value));
+    setCurrentPage(1);
+    setSortOrden(`Oredenado ${e.target.value}`);
+  }
+
   return (
     <Fragment>
-      <div>
-        <SearchBar />
-        <Link to="/postActivity">Post Activity</Link>
+      <div className={style.containerHome}>
+        <SearchBar className={style.searchBar} />
 
-        <button onClick={(e) => handleClick(e)}>Reset </button>
-        <select onChange={(e) => handleFilterBySort(e)}>
-          <option>Filter Alphabetically...</option>
-          <option value={"asc"}>Ascendent</option>
-          <option value={"desc"}>Descendent</option>
-        </select>
-        <select onChange={(e) => handleFilterByContinent(e)}>
-          <option>Filter by Continent...</option>
-          <option value="All">All Continets</option>
-          <option value="Africa">Africa</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-          <option value="North America">Noth America</option>
-          <option value="South America">South America</option>
-          <option value="Antarctica">Antarctica</option>
-          <option value="Asia">Asia</option>
-        </select>
+        <Link to="/postActivity">
+          <button className={style.buttonReload}>Post Activity</button>
+        </Link>
 
-        <select>
-          <option value="All Activities">All Activities</option>
-        </select>
+        <button className={style.buttonReload} onClick={(e) => handleClick(e)}>
+          Reload
+        </button>
+
+        <NavBar
+          handleFilterBySort={handleFilterBySort}
+          handleFilterByContinent={handleFilterByContinent}
+          handleFilterByPopulation={handleFilterByPopulation}
+          handleFilterByActivity={handleFilterByActivity}
+        />
       </div>
 
       <div>
@@ -88,7 +100,7 @@ export default function Home() {
         />
       </div>
 
-      <div className={styles.containerCountry}>
+      <div className={style.containerCountry}>
         {currentCountriesForPage?.map((country) => (
           <CountryCard
             name={country.name}

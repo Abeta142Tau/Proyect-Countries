@@ -1,7 +1,38 @@
 .containerCountry {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  padding: 1rem;
-  color: rgba(236, 227, 235, 0.562);
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1rem;
+  color: rgba(17, 1, 15, 0.253);
+  text-decoration: none;
+  margin: 0px 0px 50px 100px;
+}
+
+.containerHome {
+  display: inline-flex;
+  align-content: center;
+  align-items: center;
+  margin: 20px 50px 30px 50px;
+  gap: 2rem;
+  color: black;
+}
+
+.buttonReload {
+  align-content: center;
+  border-radius: 8px;
+  border: solid 1px;
+  width: 90px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.buttonReload:hover {
+  background-color: #3e8e418f;
+}
+
+.buttonReload:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
