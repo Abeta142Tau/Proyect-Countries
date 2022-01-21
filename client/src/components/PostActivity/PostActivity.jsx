@@ -1,10 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { getAllCountries, postActivity } from "../../actions/action_index";
+import {
+  getActivities,
+  getAllCountries,
+  postActivity,
+} from "../../actions/action_index";
 import style from "./PostActivity.module.css";
 
-function validate(input) {
+function validate(input, activity) {
   let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   let errors = {};
 
@@ -12,6 +16,9 @@ function validate(input) {
     errors.name = "Name requered";
   } else if (!regexName.test(input.name.trim())) {
     errors.name = "The label name only acept string characters";
+  } else if (activity.length > 0 && activity.includes(input.name)) {
+    alert("This activity name exisist");
+    errors.name = "This activity name exisist";
   }
 
   if (!input.duration.trim()) {
@@ -38,7 +45,7 @@ function validate(input) {
 export default function PostActivity() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const select = useSelector((state) => state.countries);
+  const { countries, activities } = useSelector((state) => state);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -50,7 +57,10 @@ export default function PostActivity() {
 
   useEffect(() => {
     dispatch(getAllCountries());
+    dispatch(getActivities());
   }, [dispatch]);
+
+  const activity = activities.length > 0 && activities.map((el) => el.name);
 
   function handleDelete(el) {
     setInput({
@@ -65,10 +75,13 @@ export default function PostActivity() {
       [e.target.name]: e.target.value,
     });
     setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
+      validate(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        activity
+      )
     );
   }
 
@@ -78,10 +91,13 @@ export default function PostActivity() {
       [e.target.name]: e.target.value,
     });
     setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
+      validate(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        activity
+      )
     );
   }
 
@@ -93,10 +109,13 @@ export default function PostActivity() {
       });
     }
     setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
+      validate(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        activity
+      )
     );
   }
 
@@ -108,10 +127,13 @@ export default function PostActivity() {
       });
     }
     setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
+      validate(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        activity
+      )
     );
   }
 
@@ -125,10 +147,13 @@ export default function PostActivity() {
       });
     }
     setErrors(
-      validate({
-        ...input,
-        countries: [...input.countries, e.target.value],
-      })
+      validate(
+        {
+          ...input,
+          countries: [...input.countries, e.target.value],
+        },
+        activity
+      )
     );
   }
 
@@ -299,8 +324,7 @@ export default function PostActivity() {
               className={style.borderInput}
               onChange={(e) => handleSelect(e)}
             >
-              <option>Select a country</option>
-              {select.map((country) => (
+              {countries.map((country) => (
                 <option value={country.name} key={country.id}>
                   {country.name}
                 </option>

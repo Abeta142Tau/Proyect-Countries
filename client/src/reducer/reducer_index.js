@@ -25,7 +25,6 @@ function rootReducer(state = initialState, action) {
       };
     case "FILTER_BY_ACTIVITY":
       const filterActivity = state.allCountries;
-      console.log(action.payload);
       const activity =
         action.payload === "All Activities"
           ? filterActivity.filter((country) => country.activities.length > 0)

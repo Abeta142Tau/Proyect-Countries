@@ -5,18 +5,18 @@ import style from "./SearchBar.module.css";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-  const [nameCountry, setNameCountry] = useState("");
+  const [name, setName] = useState("");
 
   function handleInputChange(e) {
     e.preventDefault();
-    setNameCountry("");
-    setNameCountry(e.target.value);
+    setName("");
+    setName(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getCountriesByName(nameCountry));
-    setNameCountry("");
+    dispatch(getCountriesByName(name));
+    setName("");
   }
 
   return (

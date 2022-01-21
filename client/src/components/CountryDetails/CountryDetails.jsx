@@ -35,7 +35,7 @@ export default function CountryDetails({ id }) {
             {country.activities && country.activities.length > 0 ? (
               country.activities.map((activity) => {
                 return (
-                  <div className={style.activities}>
+                  <div className={style.activities} key={activity.id}>
                     <div className={style.activitiesCard} key={activity.id}>
                       <h3>Name: {activity.name} </h3>
                       <h4>Duration: {activity.duration} hr</h4>
@@ -62,3 +62,31 @@ export default function CountryDetails({ id }) {
     </Fragment>
   );
 }
+
+/* export class Countrie extends React.Component {
+
+  render(){
+    return <div></div>;
+    
+  }
+}
+
+connect(mapStateToProps, mapDispatchToProps)(Countrie)
+
+const mapStateToProps = (state)=>{
+  return {
+counter: state.countryDetail
+  }
+}
+
+mapDispatchToProps = (dispatch)=>{
+  return{
+    getCountryDetails: function(){
+      dispatch(getCountryDetails())
+    }
+  }
+}
+
+componentDidMount=()=>{
+  mapDispatchToProps(getCountryDetails())
+} */

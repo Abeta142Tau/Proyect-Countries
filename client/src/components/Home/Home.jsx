@@ -8,6 +8,7 @@ import {
   filterBySort,
   filterByPopulation,
   filterByActivity,
+  getActivities,
 } from "../../actions/action_index";
 import CountryCard from "../ContryCard/CountryCard";
 import style from "./Home.module.css";
@@ -22,8 +23,8 @@ export default function Home() {
   const [, setSortOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1); //state del num pag
   const [CountriesForPage] = useState(9);
-  const indexOfLastCountry = CountriesForPage * currentPage; //10
-  const indexOfFirstCountry = indexOfLastCountry - CountriesForPage; //10-10=0
+  const indexOfLastCountry = CountriesForPage * currentPage; //9
+  const indexOfFirstCountry = indexOfLastCountry - CountriesForPage; //9 - 9 = 0
   const currentCountriesForPage = countriesModify.slice(
     indexOfFirstCountry,
     indexOfLastCountry
@@ -40,13 +41,13 @@ export default function Home() {
   function handleClick(e) {
     e.preventDefault();
     dispatch(getAllCountries());
+    dispatch(getActivities());
   }
 
   function handleFilterByContinent(e) {
     e.preventDefault();
     dispatch(filterByContinents(e.target.value));
     setCurrentPage(1);
-    setSortOrden(`Ordenado ${e.target.value}`);
   }
 
   function handleFilterBySort(e) {
@@ -65,10 +66,9 @@ export default function Home() {
 
   function handleFilterByActivity(e) {
     e.preventDefault();
-    console.log(e.target.value);
     dispatch(filterByActivity(e.target.value));
     setCurrentPage(1);
-    setSortOrden(`Oredenado ${e.target.value}`);
+    // setSortOrden(`Oredenado ${e.target.value}`);
   }
 
   return (

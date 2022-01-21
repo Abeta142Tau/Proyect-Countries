@@ -5,8 +5,8 @@ export default function Paged({ CountriesForPage, allCountries, paged }) {
   const pageNumbers = [];
   //obtengo el numero el pag en dependencia de la cant de country x pag y lo renderizo
   //aqui puedo intentar probar la lógica de 9 en la 1era pag, 10 en la otra.
-  for (let i = 0; i < Math.ceil(allCountries / CountriesForPage); i++) {
-    pageNumbers.push(i + 1);
+  for (let i = 1; i <= Math.ceil(allCountries / CountriesForPage); i++) {
+    pageNumbers.push(i);
   }
 
   return (

@@ -29,7 +29,6 @@ const getApiInfo = async () => {
 
 const getAllCountries = async () => {
   try {
-    //No olvidar llamar aquí getApiInfo para que en esta instancia me traiga la data y no en el index//
     let nameCountries = await getApiInfo();
     nameCountries = await Country.findAll({
       attributes: [

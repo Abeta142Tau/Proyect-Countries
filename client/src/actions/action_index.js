@@ -26,6 +26,7 @@ export function getCountriesByName(name) {
       });
     } catch (error) {
       console.log(error);
+      alert(error.response.data);
     }
   };
 }
@@ -58,7 +59,7 @@ export function getCountryDetails(id) {
   };
 }
 
-export function getActivities() {
+/* export function getActivities() {
   return async function (dispatch) {
     try {
       let activities = await axios.get("http://localhost:3001/activities");
@@ -70,6 +71,20 @@ export function getActivities() {
       console.log(error);
     }
   };
+} */
+
+export function getActivities() {
+  return function (dispatch) {
+    axios
+      .get("http://localhost:3001/activities")
+      .then((response) => {
+        return dispatch({
+          type: "GET_ALL_ACTIVITIES",
+          payload: response.data,
+        });
+      })
+      .catch((e) => console.log(e));
+  };
 }
 
 export function filterByContinents(payload) {
@@ -80,7 +95,6 @@ export function filterByContinents(payload) {
 }
 
 export function filterBySort(payload) {
-  console.log(payload);
   return {
     type: "FILTER_BY_SORT",
     payload,
